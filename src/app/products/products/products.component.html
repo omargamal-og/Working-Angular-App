@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h3 class="mb-3">Products Dashboard</h3>
+
+  <form class="row g-2 mb-3" (ngSubmit)="addProduct()">
+    <div class="col">
+      <input class="form-control" placeholder="Name" [(ngModel)]="name" name="name" />
+    </div>
+    <div class="col">
+      <input class="form-control" type="number" placeholder="Price" [(ngModel)]="price" name="price" />
+    </div>
+    <div class="col">
+      <input class="form-control" type="number" placeholder="Stock" [(ngModel)]="stock" name="stock" />
+    </div>
+    <div class="col">
+      <button class="btn btn-success w-100">Add</button>
+    </div>
+  </form>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products; let i = index">
+        <td>{{ p.name }}</td>
+        <td>{{ p.price }}</td>
+        <td>
+          <span
+            class="badge"
+            [ngClass]="p.stock === 0 ? 'bg-danger' : 'bg-success'"
+          >
+            {{ p.stock === 0 ? 'Out of Stock' : 'In Stock' }}
+          </span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-danger" (click)="deleteProduct(i)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
